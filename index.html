@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#01312d">
+<title>Energy Exchange at Evolve - Staff sign-in (SANDBOX)</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/evolve_icon_32.png">
+<link rel="apple-touch-icon" sizes="192x192" href="img/ee_app_icon_192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="portal">
+<div class="sandbox">SANDBOX - sample staff only. Nothing is texted or emailed.</div>
+<header>
+  <h1 class="brand has-lockup" aria-label="Energy Exchange at Evolve - Staff schedule">
+    <img class="brand-lockup" src="img/ee_header_lockup.png" srcset="img/ee_header_lockup.png 1x, img/ee_header_lockup@2x.png 2x" width="600" height="120" alt="">
+    <span class="brand-compact" aria-hidden="true">
+      <span class="brand-evolve"><img class="brand-logo" src="img/evolve_logo_cream_400.png" alt=""></span><span class="brand-rule"></span>
+      <span class="brand-sub"><span class="brand-ee">Energy Exchange<svg class="brand-bolt" viewBox="0 0 12 18" aria-hidden="true"><path d="M7.5 0 0 10.2h4.6L3.6 18 12 7.2H7.2z" fill="#cdf549"/></svg></span><span class="brand-at">at Evolve</span></span>
+    </span>
+  </h1>
+  <span class="who" id="who"></span>
+</header>
+<div id="offline" class="offline hide">You look offline. Your schedule will load when you reconnect.</div>
+<nav id="nav"></nav>
+<main id="main"><div class="empty">Loading...</div></main>
+<noscript><div>This page needs JavaScript turned on to show your schedule.</div></noscript>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
