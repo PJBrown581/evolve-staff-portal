@@ -5,6 +5,14 @@
    never in a URL. It is kept in sessionStorage, or localStorage when "Keep me signed in" is checked. */
 (function () {
 'use strict';
+/* ---------- anti-framing (GitHub Pages can't send frame-ancestors / X-Frame-Options) ---------- */
+var framed = true; try { framed = (top !== self); } catch (e) { framed = true; }
+if (framed) {
+  document.documentElement.className = 'fb-framed';
+  try { top.location = self.location.href; } catch (e) { /* cross-origin parent blocked the redirect: stay blank */ }
+  return;
+}
+document.documentElement.className = '';
 var K = 'ee_portal_token', S = { token: null, mode: 'none', view: 'my', me: null };
 var DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function $(id) { return document.getElementById(id); }
@@ -23,7 +31,10 @@ var store = {
   save: function (t, keep) { S.token = t; store.wipe(); var s = keep ? usable('localStorage') : null; if (s) { s.setItem(K, t); S.mode = 'local'; return; } s = usable('sessionStorage'); if (s) { s.setItem(K, t); S.mode = 'session'; return; } S.mode = 'memory'; },
   load: function () { var a = usable('localStorage'), b = usable('sessionStorage'), t = (a && a.getItem(K)) || null; if (t) { S.mode = 'local'; return t; } t = (b && b.getItem(K)) || null; if (t) { S.mode = 'session'; return t; } return null; },
   wipe: function () { ['localStorage', 'sessionStorage'].forEach(function (k) { var s = usable(k); if (s) s.removeItem(K); }); },
-  clear: function () { S.token = null; S.mode = 'none'; store.wipe(); }
+  clear: function () { S.token = null; S.mode = 'none'; store.wipe(); },
+  /* "known device" token per user ID (lets this browser skip the wait after someone else's wrong tries; it never signs anyone in). Kept on sign-out. */
+  devGet: function (u) { var s = usable('localStorage'); try { return (s && s.getItem('ee_dev:' + u)) || ''; } catch (e) { return ''; } },
+  devSet: function (u, t) { var s = usable('localStorage'); try { if (s && t) s.setItem('ee_dev:' + u, t); } catch (e) {} }
 };
 window.__eePortal = S; // read by tests only (nothing beyond what this tab already holds)
 
@@ -86,8 +97,9 @@ function showLogin(note) {
     var u = $('lUser').value.trim(), p = $('lPass').value, keep = $('lKeep').checked;
     if (!u || !p) { $('lMsg').innerHTML = '<div class="errbox">Enter your user ID and password.</div>'; return; }
     $('lGo').disabled = true; $('lGo').textContent = 'Signing in...'; $('lMsg').innerHTML = '';
-    api('login', { userId: u, password: p, keep: keep }).then(function (r) {
-      store.save(r.token, r.keep); $('lPass').value = '';
+    var uid = String(u).trim().toLowerCase();
+    api('login', { userId: u, password: p, keep: keep, deviceToken: store.devGet(uid) }).then(function (r) {
+      store.devSet(uid, r.deviceToken); store.save(r.token, r.keep); $('lPass').value = '';
       if (r.mustChange) showChange(true, r.name); else start();
     }).catch(function (e) { $('lGo').disabled = false; $('lGo').textContent = 'Sign in'; $('lPass').value = ''; $('lMsg').innerHTML = '<div class="errbox">' + esc(errMsg(e)) + '</div>'; });
   };

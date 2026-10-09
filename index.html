@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fb-wait">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'; manifest-src 'self'">
@@ -11,9 +11,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="img/evolve_icon_32.png">
 <link rel="apple-touch-icon" sizes="192x192" href="img/ee_app_icon_192.png">
 <link rel="stylesheet" href="styles.css">
+<noscript><link rel="stylesheet" href="noscript.css"></noscript>
+<!-- Framing: GitHub Pages cannot send X-Frame-Options or a CSP frame-ancestors header, and browsers ignore
+     frame-ancestors in a <meta> CSP. So the page starts hidden (html.fb-wait) and app.js shows it only when it is
+     the top window; if framed it stays blank and tries to break out. This stops clickjacking in browsers with JS on;
+     the real fix is serving it from a host that can send headers (e.g. evolvegvl.com behind a proxy/CDN). -->
 </head>
 <body class="portal">
-<div class="sandbox">SANDBOX - sample staff only. Nothing is texted or emailed.</div>
+<div class="sandbox">SANDBOX - test version. Nothing is texted or emailed.</div>
 <header>
   <h1 class="brand has-lockup" aria-label="Energy Exchange at Evolve - Staff schedule">
     <img class="brand-lockup" src="img/ee_header_lockup.png" srcset="img/ee_header_lockup.png 1x, img/ee_header_lockup@2x.png 2x" width="600" height="120" alt="">

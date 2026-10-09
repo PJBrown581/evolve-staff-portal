@@ -133,3 +133,12 @@ h3.sec{margin:16px 2px 4px}h3.sec2{margin:18px 2px 4px}
 .card.tight{padding:8px 10px}
 .offline{background:#fff8e1;border-bottom:1px solid #ffcc80;color:#5d4300;text-align:center;font-size:13px;padding:6px 10px}
 noscript div{padding:24px 16px;text-align:center}
+
+/* frame-buster: hidden until app.js confirms this is the top window (see index.html) */
+html.fb-wait body{visibility:hidden}
+html.fb-framed body{visibility:hidden}
+
+/* small phones (QA M2: header was 31px too wide at 320px; L4: nav tabs hidden off-screen) */
+@media (max-width:420px){.brand-compact{gap:8px}.brand-logo{height:20px}.brand-evolve-text{font-size:20px;letter-spacing:.16em}.brand-ee{font-size:12px;letter-spacing:.12em}.brand-at{font-size:13px}.brand-rule{min-height:24px}}
+@media (max-width:340px){.brand-compact{gap:6px}.brand-logo{height:17px}.brand-ee{font-size:11px;letter-spacing:.08em}.brand-bolt{margin-left:3px}}
+@media (max-width:600px){nav{flex-wrap:wrap;overflow-x:visible;padding:0 6px;gap:0 2px}nav button{padding:10px 8px 8px;font-size:12px;letter-spacing:.08em}}

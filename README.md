@@ -25,4 +25,10 @@ New public repo `evolve-staff-portal`, push the contents of this folder to `main
 Settings > Pages > Source: Deploy from a branch > `main` / `(root)`. The site appears at
 `https://<github-user>.github.io/evolve-staff-portal/`.
 
-SANDBOX: sample staff only. No pay or dollar amounts. Nothing is texted or emailed.
+SANDBOX (test version). No pay or dollar amounts. Nothing is texted or emailed.
+
+## Framing / clickjacking (known limitation)
+GitHub Pages can't send response headers, so there is no `X-Frame-Options` or CSP `frame-ancestors` (browsers ignore
+`frame-ancestors` in a `<meta>` CSP). Mitigation: the page starts hidden (`html.fb-wait`) and `app.js` reveals it only
+when `top === self`; inside a frame it stays blank and tries to navigate the top window to itself. With JavaScript off
+the page shows only the "needs JavaScript" note (noscript.css). The full fix is a host that sends headers.
