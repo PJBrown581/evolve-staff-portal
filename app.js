@@ -1,4 +1,4 @@
-/* Energy Exchange at Evolve - Staff Portal (static page for GitHub Pages). No build step, no third-party scripts.
+/* Work Exchange at Evolve - Staff Portal (static page for GitHub Pages). No build step, no third-party scripts.
    Talks to the portal Apps Script JSON API (API_URL in config.js) with fetch(..., {credentials:'omit'}), so no Google
    cookies are ever sent: it works the same with zero, one or several Google accounts signed in.
    Requests are text/plain POSTs (CORS "simple" requests, no preflight). The session token is sent in the JSON body only,
@@ -83,14 +83,14 @@ function pwField(id, label, auto) { return '<label for="' + id + '">' + label + 
 function wireShow() { [].forEach.call(document.querySelectorAll('.show'), function (b) { b.onclick = function () { var i = $(b.getAttribute('data-for')); var sh = i.type === 'password'; i.type = sh ? 'text' : 'password'; b.textContent = sh ? 'Hide' : 'Show'; }; }); }
 function showLogin(note) {
   S.me = null; S.view = 'my'; setWho(''); $('nav').innerHTML = '';
-  $('main').innerHTML = '<div class="signin"><div class="card"><h2>Staff sign-in</h2><p class="lead">Your Energy Exchange schedule</p>' +
+  $('main').innerHTML = '<div class="signin"><div class="card"><h2>Staff sign-in</h2><p class="lead">Your Work Exchange schedule</p>' +
     (note ? '<div class="previewbar" id="lNote">' + esc(note) + '</div>' : '') +
     '<form class="form" id="lForm" autocomplete="on" novalidate><label for="lUser">User ID</label><input type="text" id="lUser" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="60">' +
     pwField('lPass', 'Password', 'current-password') +
     '<label class="check"><input type="checkbox" id="lKeep"> <span>Keep me signed in on this device for 30 days<br><span class="muted">Only on your own phone or computer.</span></span></label>' +
     '<div id="lMsg"></div><button class="b p big" id="lGo" type="submit">Sign in</button></form>' +
     '<p class="muted mt12">Forgot your password or locked out? Ask Ariana or Jess for a new temporary password.</p></div>' +
-    '<div class="foot">Energy Exchange at Evolve &middot; staff schedule (sandbox)</div></div>';
+    '<div class="foot">Work Exchange at Evolve &middot; staff schedule (sandbox)</div></div>';
   wireShow();
   $('lForm').onsubmit = function (ev) {
     ev.preventDefault();

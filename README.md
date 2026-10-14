@@ -1,6 +1,6 @@
-# Energy Exchange at Evolve - Staff schedule (SANDBOX)
+# Work Exchange at Evolve - Staff schedule (SANDBOX)
 
-Static staff sign-in page for the Energy Exchange crew. Plain HTML/CSS/JS, no build step. Served by GitHub Pages.
+Static staff sign-in page for the Work Exchange crew. Plain HTML/CSS/JS, no build step. Served by GitHub Pages.
 Staff sign in with a user ID + password (no Google account needed) and see their shifts, open shifts, availability and time off.
 
 ## How it works
